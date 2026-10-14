@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { FindingDetailInteractive } from "../../components/FindingDetailInteractive";
+import { initialHomeData, samplePreCommitReport } from "../../data/mockData";
+
+export function getStaticPaths() {
+  const allFindings = [
+    ...initialHomeData.findings,
+    ...samplePreCommitReport.findings,
+  ];
+  return allFindings.map((f) => ({
+    params: { id: f.id },
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<Layout title={`Diagnostic Finding • HomeOS`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+    <FindingDetailInteractive client:load findingId={id as string} />
+  </div>
+</Layout>

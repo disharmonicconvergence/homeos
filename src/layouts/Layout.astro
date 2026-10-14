@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+import { Navigation } from "../components/Navigation";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "HomeOS • Your home, understood.", 
+  description = "A persistent, actionable digital operating system for your physical home in Urban India. Track health, maintenance, inventory, and pre-purchase inspection baselines." 
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="h-full antialiased bg-slate-50 text-slate-900">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      code, pre, .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+  <body class="min-h-full flex flex-col selection:bg-slate-900 selection:text-white">
+    <Navigation client:load currentPath={currentPath} />
+
+    <main class="flex-1 w-full">
+      <slot />
+    </main>
+
+    <footer class="mt-20 border-t border-slate-200/90 bg-white print:hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12">
+          {/* Brand Col */}
+          <div class="md:col-span-2 space-y-4">
+            <div class="flex items-center gap-2">
+              <div class="h-8 w-8 rounded-lg bg-slate-950 flex items-center justify-center text-white font-bold text-sm">
+                H
+              </div>
+              <span class="text-xl font-bold tracking-tight text-slate-900">HomeOS</span>
+            </div>
+            <p class="text-sm text-slate-600 max-w-sm leading-relaxed">
+              <strong>Your home, understood.</strong> The operating system for the physical home in Urban India. Consolidating assets, warranties, maintenance history, and observable health into a living digital record.
+            </p>
+            <div class="pt-2 text-xs text-slate-500 space-y-1">
+              <p>🏢 Initial Market: Bengaluru • Mumbai • NCR • Pune • Hyderabad</p>
+              <p>🛡️ Inspection Framework: Non-destructive visual & operational audits</p>
+            </div>
+          </div>
+
+          {/* Column 2: Homeowners */}
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Existing Homes</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><a href="/" class="hover:text-slate-900 transition-colors">Home Health Overview</a></li>
+              <li><a href="/inventory" class="hover:text-slate-900 transition-colors">Asset Inventory Register</a></li>
+              <li><a href="/xray-report" class="hover:text-slate-900 transition-colors">Free Home X-Ray Report</a></li>
+              <li><a href="/maintenance" class="hover:text-slate-900 transition-colors">Maintenance Planner</a></li>
+              <li><a href="/monitoring" class="hover:text-slate-900 transition-colors">Monitoring Preview</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Pre-Commit Evaluation */}
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Inspect Before Commit</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><a href="/inspect" class="hover:text-slate-900 transition-colors">Inspection Service Overview</a></li>
+              <li><a href="/inspect/book" class="hover:text-slate-900 transition-colors">Book Assessment</a></li>
+              <li><a href="/inspect/sample-report" class="hover:text-slate-900 transition-colors">Sample Pre-Commit Report</a></li>
+              <li><a href="/inspect#renter-baseline" class="hover:text-slate-900 transition-colors">Rental Move-In Baseline</a></li>
+              <li><a href="/inspect#buyer-checklist" class="hover:text-slate-900 transition-colors">Pre-Purchase Audit Scope</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Marketplace & Trust */}
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Service & Walkthrough</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><a href="/walkthrough" class="text-blue-700 font-bold hover:underline flex items-center gap-1">📖 Walkthrough Guide</a></li>
+              <li><a href="/marketplace" class="hover:text-slate-900 transition-colors">Local Service Providers</a></li>
+              <li><span class="text-slate-400">Zero Consumer Commission</span></li>
+              <li><span class="text-slate-400">Flat Monthly Provider SaaS</span></li>
+              <li><span class="text-slate-400">Explainable Recommendations</span></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Regulatory & Disclaimer Bar */}
+        <div class="mt-12 pt-8 border-t border-slate-200/80 text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-center md:text-left leading-relaxed">
+            <strong>Scope & Limitations Notice:</strong> HomeOS inspections are structured visual and operational health assessments within an agreed physical scope. They do not constitute structural engineering certifications, concealed plumbing load guarantees, or legal property title clearances.
+          </p>
+          <div class="shrink-0 text-slate-400 text-center md:text-right">
+            © 2026 HomeOS Technologies Pvt. Ltd. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

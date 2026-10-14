@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { AssetDetailInteractive } from "../../components/AssetDetailInteractive";
+import { initialHomeData } from "../../data/mockData";
+
+export function getStaticPaths() {
+  return initialHomeData.assets.map((asset) => ({
+    params: { id: asset.id },
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<Layout title={`Asset Detail • HomeOS`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+    <AssetDetailInteractive client:load assetId={id as string} />
+  </div>
+</Layout>
